@@ -1,26 +1,27 @@
-def roman_to_int(s):
-    roman_map = {
-        'I': 1,
-        'V': 5,
-        'X': 10,
-        'L': 50,
-        'C': 100,
-        'D': 500,
-        'M': 1000
-    }
+import unittest
+from wk9 import roman_to_int
 
-    converted_number = 0
-    for i in range(len(s)):
-        current_number = roman_map[s[i]]
-        next_num = roman_map[s[i + 1]] if i + 1 < len(s) else 0
+class TestRomanToInt(unittest.TestCase):
 
-        if current_number >= next_num:
-            converted_number += current_number
-        else:
-            converted_number -= current_number
+    def test_valid_uppercase_roman_numerals(self):
+        self.assertEqual(roman_to_int("I"), 1)
+        self.assertEqual(roman_to_int("IV"), 4)
+        self.assertEqual(roman_to_int("IX"), 9)
+        self.assertEqual(roman_to_int("XII"), 12)
+        self.assertEqual(roman_to_int("XXI"), 21)
+        self.assertEqual(roman_to_int("XLII"), 42)
+        self.assertEqual(roman_to_int("LX"), 60)
+        self.assertEqual(roman_to_int("XC"), 90)
+        self.assertEqual(roman_to_int("CXX"), 120)
+        self.assertEqual(roman_to_int("CD"), 400)
+        self.assertEqual(roman_to_int("DCCC"), 800)
+        self.assertEqual(roman_to_int("CM"), 900)
+        self.assertEqual(roman_to_int("MCMXCIV"), 1994)
 
-    return converted_number
+    def test_invalid_input(self):
+        with self.assertRaises(ValueError):
+            roman_to_int("ZSW")
+        # Add more invalid input test cases here
 
-
-result = roman_to_int("IX")
-print(result)  # Output: 9
+if __name__ == "__main":
+    unittest.main()
