@@ -13,6 +13,9 @@ def roman_to_int(s):
     for i in range(len(s)):
         current_number = roman_map[s[i]]
         next_num = roman_map[s[i + 1]] if i + 1 < len(s) else 0
+        if current_number is None:
+            return 0
+
 
         if current_number >= next_num:
             converted_number += current_number
